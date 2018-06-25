@@ -1,0 +1,69 @@
+{include file='common/header' /}
+
+<div class="overall">
+    <div class="left">
+        <div class="scrap">
+            <h1>{$articleContent['title']}</h1>
+            <div class="spread">
+                <span class="writor">发布时间：{$articleContent['time']|date='Y-m-d H:i:s'}</span>
+                <span class="writor">编辑：{$articleContent['author']}</span>
+                <span class="writor">标签：
+                    <?php foreach(explode(',',$articleContent['keywords']) as $v1):?>
+                    <a href="{:url('index/search/index','keywords='.$v1)}">{$v1|default='无标签'}</a>
+                    <?php endforeach;?>
+                </span>
+                <span class="writor red">热度：<i style="color:red;">{$articleContent['click']}</i></span>
+            </div>
+        </div>
+        <div class="takeaway">
+            <span class="btn arr-left"></span>
+            <p class="jjxq">{$articleContent['desc']}</p>
+            <span class="btn arr-right"></span>
+        </div>
+        <div class="substance">{$articleContent['content']|raw}</div>
+
+        <!--相关阅读 -->
+        <div class="xgread">
+            <div class="til"><h4>相关阅读</h4></div>
+            <div class="lef"><!--相关阅读主题链接--><script src='/jiehun/goto/my-65540.js' language='javascript'></script></div>
+            <div class="rig">
+                {if($ralateres)}
+                <ul>
+                    {foreach($ralateres as $v)}
+                    <li>
+                        <a href="{:url('index/index/article','id='.$v['id'])}" target="_new">{$v['title']}</a>
+                    </li>
+                    {/foreach}
+                </ul>
+                {else/}
+                <div>暂无相关阅读文章</div>
+                {/if}
+            </div>
+        </div>
+
+        <!--频道推荐-->
+        <div class="hotsnew">
+            <div class="til"><h4>频道推荐</h4></div>
+            <ul>
+                {foreach($reces as $v)}
+                <li>
+                    <div class="tu">
+                        <a href="{:url('index/index/article','id='.$v['id'])}" target="_new">
+                            <img src="{$v['pic']}" alt="{$v['title']}"/>
+                        </a>
+                    </div>
+                    <p>
+                        <a href="{:url('index/index/article','id='.$v['id'])}" target="_new">{$v['title']}</a>
+                    </p>
+                </li>
+                {/foreach}
+            </ul>
+        </div>		
+    </div>
+
+
+<!-- right -->
+{include file='common/right' /}
+
+<!-- footer -->
+{include file='common/footer' /}

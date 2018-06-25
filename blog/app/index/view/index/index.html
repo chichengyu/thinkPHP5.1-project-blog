@@ -1,0 +1,38 @@
+{include file='common/header' /}
+<div class="position"></div>
+
+<div class="overall">
+	<div class="left">
+			{foreach($articleDate as $v)}
+			<div class="xnews2">
+				<div class="pic">
+					<a target="_new" href="{:url('article','id='.$v['id'])}">
+						<img width="100%" height="100%" src="{$v['pic']}" title="{$v['title']}" alt="{$v['title']}"/>
+					</a>
+				</div>
+				<div class="dec">
+					<h3>
+						<a target="_new" href="{:url('article','id='.$v['id'])}">{$v['title']}</a>
+					</h3>
+					<div class="time">发布时间：{$v['time']|date='Y-m-d H:i:s'}</div>
+					<p>{$v['desc']}</p>
+					<div class="time">
+						<?php foreach(explode(',',$v['keywords']) as $v1):?>
+						<a href="{:url('index/search/index','keywords='.$v1)}">{$v1|default='无标签'}</a>
+						<?php endforeach;?>
+					</div>
+				</div>
+			</div>
+			{/foreach}
+			<!-- 分页 -->
+			<div id="page">
+				{volist name='articleDate' id='user'}
+				{/volist}
+				{$articleDate|raw}
+			</div>
+</div>
+	
+
+<!-- right -->
+{include file='common/right' /}
+{include file='common/footer' /}
